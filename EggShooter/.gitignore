@@ -2,6 +2,7 @@
 /Debug/
 /Release/
 /build/
+/Drivers/
 *.o
 *.d
 *.map
@@ -14,6 +15,9 @@
 # ===== STM32CubeIDE =====
 /.settings/
 /STM32CubeIDE/.mxproject
+/STM32CubeIDE/Debug
+/STM32CubeIDE/Drivers
+/STM32CubeIDE/Middlewares
 *.project
 *.cproject
 *.launch
