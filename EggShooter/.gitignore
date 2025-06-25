@@ -2,7 +2,7 @@
 /Debug/
 /Release/
 /build/
-/Drivers/
+Drivers/
 *.o
 *.d
 *.map
