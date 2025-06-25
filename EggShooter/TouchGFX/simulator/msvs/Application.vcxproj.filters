@@ -196,6 +196,30 @@
     <Filter Include="Header Files\generated\simulator\include\simulator\video">
       <UniqueIdentifier>082EC27B-9AE3-A730-4DAA-ADC4243CDDAF</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\gui\stage_screen">
+      <UniqueIdentifier>63C7E09E-E7A9-DEEA-2418-5A4C6DE7F10C</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\stage_screen">
+      <UniqueIdentifier>41608239-3083-0AB8-D72D-95BD18FCCE1A</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\gui\ingame_screen">
+      <UniqueIdentifier>0E406519-64C5-AF84-C43A-9BD57027130A</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\gui\ingame_screen">
+      <UniqueIdentifier>DF308A2A-1875-F443-EAE7-4298F61DEB5B</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\ingame_screen">
+      <UniqueIdentifier>38020873-CA89-6639-F59E-4928E282CAFC</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\ingame_screen">
+      <UniqueIdentifier>B299F6DD-E1B2-1242-283C-13E470209340</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\generated\gui_generated\stage_screen">
+      <UniqueIdentifier>C83DDB7E-7E9D-DADB-A409-74FCDEFAD047</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\generated\gui_generated\stage_screen">
+      <UniqueIdentifier>4ECA5F31-247F-B5C1-3447-8D695A6C56DD</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(TouchGFXReleasePath)\framework\source\platform\driver\touch\SDL2TouchController.cpp">
@@ -245,6 +269,24 @@
     </ClCompile>
     <ClCompile Include="..\..\generated\simulator\src\video\SoftwareMJPEGDecoder.cpp">
       <Filter>Source Files\generated\simulator\video</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\ingame_screen\IngamePresenter.cpp">
+      <Filter>Source Files\gui\ingame_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\ingame_screen\IngameView.cpp">
+      <Filter>Source Files\gui\ingame_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\ingame_screen\IngameViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\ingame_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\stage_screen\StagePresenter.cpp">
+      <Filter>Source Files\gui\stage_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gui\src\stage_screen\StageView.cpp">
+      <Filter>Source Files\gui\stage_screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\generated\gui_generated\src\stage_screen\StageViewBase.cpp">
+      <Filter>Source Files\generated\gui_generated\stage_screen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -705,6 +747,24 @@
     </ClInclude>
     <ClInclude Include="..\..\generated\simulator\include\simulator\video\SoftwareMJPEGDecoder.hpp">
       <Filter>Header Files\generated\simulator\include\simulator\video</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\ingame_screen\IngamePresenter.hpp">
+      <Filter>Header Files\gui\ingame_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\ingame_screen\IngameView.hpp">
+      <Filter>Header Files\gui\ingame_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\ingame_screen\IngameViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\ingame_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\stage_screen\StagePresenter.hpp">
+      <Filter>Header Files\gui\stage_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gui\include\gui\stage_screen\StageView.hpp">
+      <Filter>Header Files\gui\stage_screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\stage_screen\StageViewBase.hpp">
+      <Filter>Header Files\generated\gui_generated\stage_screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
