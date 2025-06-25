@@ -1,0 +1,7 @@
+# Các thư mục được tạo tự động theo đề xuất của Anders
+/generated/
+/build/
+/simulator/msvs/.vs/
+
+# Có thể thêm TouchGFX framework nếu bạn muốn (xem xét thêm ở bước sau)
+/TouchGFX/
