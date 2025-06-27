@@ -16,3 +16,17 @@ void IngamePresenter::deactivate()
 {
 
 }
+int IngamePresenter::getRowCount() const
+{
+    return model->getCurrentRowCount();
+}
+
+int IngamePresenter::getColCount() const
+{
+    return Model::MAX_COLS;
+}
+
+const Model::EggData& IngamePresenter::getEggAt(int row, int col) const
+{
+    return model->getEgg(row, col);
+}

@@ -3,22 +3,29 @@
 #include <images/BitmapDatabase.hpp>
 IngameView::IngameView()
 {
-	for (int row = 0; row < MAX_ROWS; ++row)
-	{
-		for (int col = 0; col < MAX_COLS; ++col)
-		{
-			eggImages[row][col].setBitmap(Bitmap(BITMAP_GREEN_ID)); // hoặc Bitmap() nếu chưa có rỗng
-			int x = startX + col * (eggSize + spacing);
-			int y = startY + row * (eggSize + spacing);
-			eggImages[row][col].setXY(x, y);
-			add(eggImages[row][col]);
-		}
-	}
+
 }
 
 void IngameView::setupScreen()
 {
     IngameViewBase::setupScreen();
+    for (int row = 0; row < presenter->getRowCount(); ++row)
+	{
+		for (int col = 0; col < presenter->getColCount(); ++col)
+		{
+			const auto& egg = presenter->getEggAt(row, col);
+			if (egg.active)
+			{
+				showEggAt(row, col, egg.type);
+			}
+			else
+			{
+				// Nếu không active, có thể ẩn trứng (set bitmap trắng)
+				eggImages[row][col].setBitmap(Bitmap(BITMAP_GREEN_ID));
+				eggImages[row][col].invalidate();
+			}
+		}
+	}
 }
 
 void IngameView::tearDownScreen()
@@ -38,4 +45,13 @@ BitmapId IngameView::getEggBitmapByType(int type)
     default:
         return BITMAP_BROWN_ID;
     }
+}
+void IngameView::showEggAt(int row, int col, int type)
+{
+    if (row >= MAX_ROWS || col >= MAX_COLS)
+        return;
+
+    BitmapId bmpId = getEggBitmapByType(type);
+    eggImages[row][col].setBitmap(Bitmap(bmpId));
+    eggImages[row][col].invalidate();
 }

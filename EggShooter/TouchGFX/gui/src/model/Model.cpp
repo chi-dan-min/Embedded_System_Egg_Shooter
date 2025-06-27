@@ -1,22 +1,22 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 #include <stdlib.h>
-//#include <touchgfx/Bitmap.hpp>
-//#include <images/BitmapDatabase.hpp>
-//using namespace touchgfx;
-//
-//const BitmapId eggBitmaps[] = {
-//		BITMAP_GREEN_ID,
-//		BITMAP_RED_ID,
-//		BITMAP_YELLOW_ID,
-//		BITMAP_BROWN_ID,
-//		BITMAP_MIDNIGHT_ID,
-//		BITMAP_PURPLE_ID,
-//		BITMAP_BLACK_ID
-//};
-//
-//
-//const int eggCount = sizeof(eggBitmaps) / sizeof(BitmapId);
+#include <touchgfx/Bitmap.hpp>
+#include <images/BitmapDatabase.hpp>
+using namespace touchgfx;
+
+const BitmapId eggBitmaps[] = {
+		BITMAP_GREEN_ID,
+		BITMAP_RED_ID,
+		BITMAP_YELLOW_ID,
+		BITMAP_BROWN_ID,
+		BITMAP_MIDNIGHT_ID,
+		BITMAP_PURPLE_ID,
+		BITMAP_BLACK_ID
+};
+
+
+const int eggCount = sizeof(eggBitmaps) / sizeof(BitmapId);
 
 Model::Model() : modelListener(0)
 {
@@ -48,7 +48,7 @@ void Model::spawnRow()
 
     for (int c = 0; c < MAX_COLS; ++c)
     {
-        eggMap[0][c].type = rand() % 3;
+        eggMap[0][c].type = rand() % eggCount;
         eggMap[0][c].active = true;
     }
 
