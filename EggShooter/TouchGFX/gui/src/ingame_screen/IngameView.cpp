@@ -1,57 +1,65 @@
 #include <gui/ingame_screen/IngameView.hpp>
 #include <touchgfx/Bitmap.hpp>
 #include <images/BitmapDatabase.hpp>
+
 IngameView::IngameView()
 {
-
+    for (int row = 0; row < MAX_ROWS; ++row)
+    {
+        for (int col = 0; col < MAX_COLS; ++col)
+        {
+            eggImages[row][col].setBitmap(Bitmap()); // Ban đầu trống
+            eggImages[row][col].setXY(0, 0);
+            eggImages[row][col].setVisible(false);   // Ẩn đến khi cần hiện
+            add(eggImages[row][col]);                // Quan trọng!
+        }
+    }
 }
 
 void IngameView::setupScreen()
 {
     IngameViewBase::setupScreen();
-    for (int row = 0; row < presenter->getRowCount(); ++row)
-	{
-		for (int col = 0; col < presenter->getColCount(); ++col)
-		{
-			const auto& egg = presenter->getEggAt(row, col);
-			if (egg.active)
-			{
-				showEggAt(row, col, egg.type);
-			}
-			else
-			{
-				// Nếu không active, có thể ẩn trứng (set bitmap trắng)
-				eggImages[row][col].setBitmap(Bitmap(BITMAP_GREEN_ID));
-				eggImages[row][col].invalidate();
-			}
-		}
-	}
+    updateEggGrid();         // Vẽ trứng ngay khi screen hiện
+    presenter->startTimer(); // Bắt đầu tick timer
 }
 
 void IngameView::tearDownScreen()
 {
     IngameViewBase::tearDownScreen();
 }
-BitmapId IngameView::getEggBitmapByType(int type)
+
+void IngameView::updateEggGrid()
 {
-    switch (type)
+    for (int row = 0; row < presenter->getRowCount(); ++row)
     {
-    case 0:
-        return BITMAP_GREEN_ID;
-    case 1:
-        return BITMAP_RED_ID;
-    case 2:
-        return BITMAP_YELLOW_ID;
-    default:
-        return BITMAP_BROWN_ID;
+        for (int col = 0; col < MAX_COLS; ++col)
+        {
+            const auto& egg = presenter->getEggAt(row, col);
+
+            if (egg.active)
+            {
+                eggImages[row][col].setXY(egg.x, egg.y);
+                eggImages[row][col].setBitmap(Bitmap(egg.id));
+                eggImages[row][col].setVisible(true);
+            }
+            else
+            {
+                eggImages[row][col].setVisible(false);
+            }
+
+            eggImages[row][col].invalidate(); // Cập nhật lại
+        }
     }
 }
-void IngameView::showEggAt(int row, int col, int type)
-{
-    if (row >= MAX_ROWS || col >= MAX_COLS)
-        return;
 
-    BitmapId bmpId = getEggBitmapByType(type);
-    eggImages[row][col].setBitmap(Bitmap(bmpId));
-    eggImages[row][col].invalidate();
+void IngameView::clearEggGrid(){
+	for (int row = 0; row < presenter->getRowCount(); ++row)
+	{
+		for (int col = 0; col < MAX_COLS; ++col)
+		{
+			const auto& egg = presenter->getEggAt(row, col);
+			eggImages[row][col].setVisible(false);
+			eggImages[row][col].invalidate(); // Cập nhật lại
+		}
+	}
 }

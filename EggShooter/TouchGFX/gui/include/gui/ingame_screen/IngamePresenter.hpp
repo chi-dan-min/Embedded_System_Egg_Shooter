@@ -26,12 +26,14 @@ public:
     virtual void deactivate();
 
     virtual ~IngamePresenter() {}
-
+    virtual void onEggGridChanged();
+    virtual void onClearGrid();
 
     int getRowCount() const;
     int getColCount() const;
 
     const Model::EggData& getEggAt(int row, int col) const;
+    void startTimer();
 private:
     IngamePresenter();
 

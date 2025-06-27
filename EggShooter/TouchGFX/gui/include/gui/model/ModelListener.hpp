@@ -9,7 +9,8 @@ public:
     ModelListener() : model(0) {}
     
     virtual ~ModelListener() {}
-
+    virtual void onEggGridChanged() {}
+    virtual void onClearGrid() {}
     void bind(Model* m)
     {
         model = m;

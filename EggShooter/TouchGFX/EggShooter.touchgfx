@@ -421,9 +421,9 @@
             "Type": "FlexButton",
             "Name": "SurvivalMode",
             "X": 12,
-            "Y": 7,
+            "Y": 8,
             "Width": 216,
-            "Height": 43,
+            "Height": 35,
             "Alpha": 0,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
@@ -432,7 +432,7 @@
               {
                 "Type": "BoxWithBorderButtonStyle",
                 "Width": 216,
-                "Height": 43,
+                "Height": 35,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
                 "ColorReleased": {

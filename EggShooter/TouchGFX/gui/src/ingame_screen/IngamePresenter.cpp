@@ -30,3 +30,14 @@ const Model::EggData& IngamePresenter::getEggAt(int row, int col) const
 {
     return model->getEgg(row, col);
 }
+void IngamePresenter::startTimer(){
+	model->startTimer();
+}
+void IngamePresenter::onEggGridChanged()
+{
+    view.updateEggGrid();
+}
+void IngamePresenter::onClearGrid()
+{
+	view.clearEggGrid();
+}
