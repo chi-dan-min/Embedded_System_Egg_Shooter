@@ -27,6 +27,10 @@ public:
 
     virtual ~IntroPresenter() {}
 
+    int getRowCount() const;
+    int getColCount() const;
+
+    const Model::EggData& getEggAt(int row, int col) const;
 private:
     IntroPresenter();
 
