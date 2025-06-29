@@ -83,8 +83,19 @@
         "Name": "Ingame",
         "Components": [
           {
+            "Type": "ScalableImage",
+            "Name": "scalableImage2_1",
+            "X": 191,
+            "Y": 280,
+            "Width": 71,
+            "Height": 40,
+            "Filename": "bush2.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
             "Type": "Image",
             "Name": "image1",
+            "Y": -1,
             "Width": 240,
             "Height": 320,
             "RelativeFilename": "Ingame.png"
@@ -137,6 +148,89 @@
             "TextId": "__SingleUse_NUAE",
             "TextRotation": "0",
             "AutoSize": true
+          },
+          {
+            "Type": "Image",
+            "Name": "eggToShootImage",
+            "X": 80,
+            "Y": 260,
+            "Width": 80,
+            "Height": 80
+          },
+          {
+            "Type": "TextureMapper",
+            "Name": "arrow",
+            "X": 44,
+            "Y": 224,
+            "Width": 152,
+            "Height": 152,
+            "RenderingAlgorithm": "Nearest-neighbor",
+            "FileNameImage": "arrow.png",
+            "XBitmapPosition": 46.0,
+            "YBitmapPosition": -45.0,
+            "Scale": 0.6,
+            "LockOrigoToCenter": true,
+            "XOrigo": 76.0,
+            "YOrigo": 76.0,
+            "ZOrigo": 1000.0,
+            "CameraDistance": 1000.0
+          },
+          {
+            "Type": "TextureMapper",
+            "Name": "gun",
+            "X": 44,
+            "Y": 224,
+            "Width": 152,
+            "Height": 152,
+            "RenderingAlgorithm": "Nearest-neighbor",
+            "FileNameImage": "new gun.png",
+            "XBitmapPosition": 41.5,
+            "YBitmapPosition": 12.5,
+            "Scale": 0.7,
+            "LockOrigoToCenter": true,
+            "XOrigo": 76.0,
+            "YOrigo": 76.0,
+            "ZOrigo": 1000.0,
+            "CameraDistance": 1000.0
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "currentEgg",
+            "X": 110,
+            "Y": 290,
+            "Width": 20,
+            "Height": 20,
+            "Filename": "black.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "bush",
+            "X": 180,
+            "Y": 280,
+            "Width": 71,
+            "Height": 40,
+            "Filename": "bush2.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "Image",
+            "Name": "nextEgg",
+            "X": 200,
+            "Y": 290,
+            "Width": 30,
+            "Height": 30,
+            "RelativeFilename": "black.png"
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "halfBush",
+            "X": 216,
+            "Y": 273,
+            "Width": 35,
+            "Height": 46,
+            "Filename": "bush2.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
           }
         ],
         "Interactions": [

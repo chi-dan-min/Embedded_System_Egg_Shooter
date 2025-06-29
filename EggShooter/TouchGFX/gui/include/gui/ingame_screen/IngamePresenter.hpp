@@ -28,12 +28,14 @@ public:
     virtual ~IngamePresenter() {}
     virtual void onEggGridChanged();
     virtual void onClearGrid();
-
+    virtual void onRotateGunAndShot(float alfaGun, int8_t shoot);
+    virtual void handleIngameTickEvent();
+    virtual BitmapId getRandBitmapId();
     int getRowCount() const;
     int getColCount() const;
 
     const Model::EggData& getEggAt(int row, int col) const;
-    void startTimer();
+    virtual void startTimer();
 private:
     IngamePresenter();
 

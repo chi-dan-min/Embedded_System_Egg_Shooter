@@ -41,3 +41,13 @@ void IngamePresenter::onClearGrid()
 {
 	view.clearEggGrid();
 }
+void IngamePresenter::onRotateGunAndShot(float alfaGun, int8_t shoot)
+{
+	view.rotateGunAndShot(alfaGun, shoot);
+}
+BitmapId IngamePresenter::getRandBitmapId(){
+	return model->getRandBitmapId();
+}
+void IngamePresenter::handleIngameTickEvent(){
+	view.handleTickEvent();
+}

@@ -11,6 +11,8 @@ public:
     virtual ~ModelListener() {}
     virtual void onEggGridChanged() {}
     virtual void onClearGrid() {}
+    virtual void onRotateGunAndShot(float alfaGun, int8_t shoot){}
+    virtual void handleIngameTickEvent(){}
     void bind(Model* m)
     {
         model = m;

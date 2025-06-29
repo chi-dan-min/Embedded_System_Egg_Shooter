@@ -30,17 +30,21 @@ public:
 
 	void spawnRow();
 	int getCurrentRowCount() const { return currentRowCount; }
+	void prepareNextEgg();
 	void startTimer();
+	BitmapId getRandBitmapId();
 protected:
     ModelListener* modelListener;
     EggData eggMap[MAX_ROWS][MAX_COLS];
 	int currentRowCount = 0;
 	int counter = 0;
+	float alfaGun = 0;
+	BitmapId currentEggId;
+	BitmapId nextEggId;
 	const int eggSize = 30;
 	const int startX = 0;
 	const int startY = 57;
 	const int spacing = 0;
-
 	void shiftRowsDown();
 };
 

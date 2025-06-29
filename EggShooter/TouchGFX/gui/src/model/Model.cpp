@@ -1,7 +1,12 @@
 #include <gui/model/Model.hpp>
 #include <gui/model/ModelListener.hpp>
 #include <stdlib.h>
-
+#include <main.h>
+#include <stdio.h>
+#include <cstring>
+extern int8_t direction;
+extern int8_t shoot;
+extern UART_HandleTypeDef huart1;
 const BitmapId eggIds[] = {
     BITMAP_GREEN_ID,
     BITMAP_RED_ID,
@@ -14,7 +19,7 @@ const BitmapId eggIds[] = {
 
 const int eggCount = sizeof(eggIds) / sizeof(BitmapId);
 
-Model::Model() : modelListener(0), counter(0), currentRowCount(0)
+Model::Model() : modelListener(0), counter(0), currentRowCount(0), alfaGun(0)
 {
     // Khởi tạo lưới trứng rỗng
     for (int r = 0; r < MAX_ROWS; ++r)
@@ -30,11 +35,27 @@ Model::Model() : modelListener(0), counter(0), currentRowCount(0)
     {
         spawnRow();
     }
+    // Sinh trứng ban đầu
 }
 
 void Model::tick()
 {
     counter++;
+    if(modelListener){
+		if(direction == 1){
+			if(alfaGun <= 1.1)
+				alfaGun += 0.05;
+		}
+		else if(direction == -1){
+			if(alfaGun >= -1.1)
+				alfaGun -= 0.05;
+		}
+		if (modelListener)
+			modelListener->onRotateGunAndShot(alfaGun, shoot);
+    }
+
+    if (modelListener)
+    		modelListener->handleIngameTickEvent();
 
     if (counter >= 500)
     {
@@ -50,8 +71,8 @@ void Model::tick()
 
 void Model::spawnRow()
 {
-//    if (currentRowCount >= MAX_ROWS)
-//        return;
+    if (currentRowCount >= MAX_ROWS)
+        return;
 
     shiftRowsDown();
 
@@ -90,7 +111,12 @@ void Model::shiftRowsDown()
     }
 }
 
+BitmapId Model::getRandBitmapId(){
+	return eggIds[rand() % eggCount];
+}
 void Model::startTimer()
 {
     counter = 0;
+    alfaGun = 0;
 }
+

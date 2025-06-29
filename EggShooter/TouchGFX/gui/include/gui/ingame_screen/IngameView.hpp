@@ -14,10 +14,18 @@ public:
 
     void updateEggGrid();
     void clearEggGrid();
-protected:
+    void rotateGunAndShot(float alfaGun, int8_t shoot);
+    void updateEggToShoot();
+    void handleTickEvent();
+    BitmapId getRandBitmapId();
 	static const int MAX_ROWS = 7;
 	static const int MAX_COLS = 8;
 	touchgfx::Image eggImages[MAX_ROWS][MAX_COLS];
+	int isShooting = 0;
+	BitmapId current, next;
+	float eggX, eggY;
+	float velocityX, velocityY;
+	float speed = 5.0f;
 };
 
 #endif // INGAMEVIEW_HPP
