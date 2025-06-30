@@ -14,13 +14,6 @@ IngameView::IngameView()
             add(eggImages[row][col]);                // Quan trọng!
         }
     }
-//    current = getRandBitmapId();
-//    currentEgg.setBitmap(Bitmap(current));
-//    currentEgg.setPosition(110, 290, 20, 20);
-//    currentEgg.invalidate();
-//    next = getRandBitmapId();
-//    nextEgg.setBitmap(Bitmap(next));
-//    nextEgg.invalidate();
 }
 
 void IngameView::setupScreen()
@@ -39,7 +32,7 @@ void IngameView::tearDownScreen()
 
 void IngameView::updateEggGrid()
 {
-    for (int row = 0; row < presenter->getRowCount(); ++row)
+	for (int row = 0; row < MAX_ROWS; ++row)
     {
         for (int col = 0; col < MAX_COLS; ++col)
         {
@@ -62,7 +55,7 @@ void IngameView::updateEggGrid()
 }
 
 void IngameView::clearEggGrid(){
-	for (int row = 0; row < presenter->getRowCount(); ++row)
+	for (int row = 0; row < MAX_ROWS; ++row)
 	{
 		for (int col = 0; col < MAX_COLS; ++col)
 		{
@@ -71,6 +64,7 @@ void IngameView::clearEggGrid(){
 		}
 	}
 }
+
 void IngameView::rotateGunAndShot(float alfaGun, int8_t shoot)
 {
 	if(alfaGun > 0){
@@ -95,9 +89,11 @@ void IngameView::rotateGunAndShot(float alfaGun, int8_t shoot)
 	    eggToShootImage.setBitmap(Bitmap(currentEgg.getBitmap()));
 	    eggToShootImage.setXY((int)eggX, (int)eggY);
 	    eggToShootImage.setVisible(true);
+	    shooted = current;
 	    updateEggToShoot();
 	}
 }
+
 void IngameView::handleTickEvent() {
     if (isShooting) {
     	eggToShootImage.setVisible(false);
@@ -113,12 +109,37 @@ void IngameView::handleTickEvent() {
         eggToShootImage.setXY((int)eggX, (int)eggY);
         eggToShootImage.invalidate();
 
+        // Va chạm với lưới
+		touchgfx::Rect bulletRect((int)eggX, (int)eggY, eggToShootImage.getWidth(), eggToShootImage.getHeight());
+
+		for (int row = 0; row < MAX_ROWS; ++row)
+		{
+		   for (int col = 0; col < MAX_COLS; ++col)
+		   {
+			   if (!eggImages[row][col].isVisible())
+				   continue;
+
+			   touchgfx::Rect eggRect = eggImages[row][col].getAbsoluteRect();
+
+			   if (bulletRect.intersect(eggRect))
+			   {
+				   isShooting = false;
+				   eggToShootImage.setVisible(false);
+
+				   presenter->attachEggToGrid((int)eggX, (int)eggY, shooted);
+				   updateEggGrid();
+				   return;
+			   }
+		   }
+		}
+
         if (eggY < 50) {
             isShooting = false;
             eggToShootImage.setVisible(false);
         }
     }
 }
+
 void IngameView::updateEggToShoot()
 {
 	current = next;
@@ -131,6 +152,7 @@ void IngameView::updateEggToShoot()
     nextEgg.setBitmap(Bitmap(next));
     nextEgg.invalidate();
 }
+
 
 BitmapId IngameView::getRandBitmapId()
 {

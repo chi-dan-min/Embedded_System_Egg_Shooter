@@ -31,6 +31,7 @@ public:
     virtual void onRotateGunAndShot(float alfaGun, int8_t shoot);
     virtual void handleIngameTickEvent();
     virtual BitmapId getRandBitmapId();
+    virtual void attachEggToGrid(int x, int y, BitmapId id);
     int getRowCount() const;
     int getColCount() const;
 

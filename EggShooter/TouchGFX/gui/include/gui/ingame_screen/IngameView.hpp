@@ -22,10 +22,10 @@ public:
 	static const int MAX_COLS = 8;
 	touchgfx::Image eggImages[MAX_ROWS][MAX_COLS];
 	int isShooting = 0;
-	BitmapId current, next;
+	BitmapId current, next, shooted;
 	float eggX, eggY;
 	float velocityX, velocityY;
-	float speed = 5.0f;
+	float speed = 3.0f;
 };
 
 #endif // INGAMEVIEW_HPP

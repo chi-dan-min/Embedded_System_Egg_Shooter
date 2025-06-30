@@ -16,15 +16,6 @@ void IngamePresenter::deactivate()
 {
 
 }
-int IngamePresenter::getRowCount() const
-{
-    return model->getCurrentRowCount();
-}
-
-int IngamePresenter::getColCount() const
-{
-    return Model::MAX_COLS;
-}
 
 const Model::EggData& IngamePresenter::getEggAt(int row, int col) const
 {
@@ -50,4 +41,7 @@ BitmapId IngamePresenter::getRandBitmapId(){
 }
 void IngamePresenter::handleIngameTickEvent(){
 	view.handleTickEvent();
+}
+void IngamePresenter::attachEggToGrid(int x, int y, BitmapId id){
+	 model->attachEggToGrid(x, y, id);
 }
