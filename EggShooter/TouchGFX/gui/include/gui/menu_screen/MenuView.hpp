@@ -11,6 +11,8 @@ public:
     virtual ~MenuView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+    virtual void openHighScore();
+    virtual void setStageSurvival();
 protected:
 };
 

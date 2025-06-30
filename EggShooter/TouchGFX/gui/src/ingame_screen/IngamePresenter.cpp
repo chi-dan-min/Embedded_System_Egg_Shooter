@@ -17,6 +17,9 @@ void IngamePresenter::deactivate()
 
 }
 
+void IngamePresenter::setPaused(bool state){
+	model->setPaused(state);
+}
 const Model::EggData& IngamePresenter::getEggAt(int row, int col) const
 {
     return model->getEgg(row, col);
@@ -43,5 +46,8 @@ void IngamePresenter::handleIngameTickEvent(){
 	view.handleTickEvent();
 }
 void IngamePresenter::attachEggToGrid(int x, int y, BitmapId id){
-	 model->attachEggToGrid(x, y, id);
+	model->attachEggToGrid(x, y, id);
+}
+void IngamePresenter::onGameOver(){
+	view.openGameOver();
 }

@@ -16,3 +16,6 @@ void StagePresenter::deactivate()
 {
 
 }
+void StagePresenter::setStage(int newStage){
+	model->setStage(newStage);
+}

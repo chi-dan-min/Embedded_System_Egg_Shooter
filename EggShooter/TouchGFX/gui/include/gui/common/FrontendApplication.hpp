@@ -2,7 +2,6 @@
 #define FRONTENDAPPLICATION_HPP
 
 #include <gui_generated/common/FrontendApplicationBase.hpp>
-
 class FrontendHeap;
 
 using namespace touchgfx;

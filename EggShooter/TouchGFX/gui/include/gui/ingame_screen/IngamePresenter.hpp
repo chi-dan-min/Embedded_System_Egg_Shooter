@@ -26,17 +26,17 @@ public:
     virtual void deactivate();
 
     virtual ~IngamePresenter() {}
+    virtual void setPaused(bool state);
     virtual void onEggGridChanged();
     virtual void onClearGrid();
     virtual void onRotateGunAndShot(float alfaGun, int8_t shoot);
     virtual void handleIngameTickEvent();
     virtual BitmapId getRandBitmapId();
     virtual void attachEggToGrid(int x, int y, BitmapId id);
-    int getRowCount() const;
-    int getColCount() const;
 
     const Model::EggData& getEggAt(int row, int col) const;
     virtual void startTimer();
+    virtual void onGameOver();
 private:
     IngamePresenter();
 

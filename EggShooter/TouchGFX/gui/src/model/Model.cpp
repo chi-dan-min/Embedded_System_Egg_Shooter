@@ -2,7 +2,7 @@
 #include <gui/model/ModelListener.hpp>
 #include <stdlib.h>
 #include <main.h>
-//#include <stdio.h>
+#include <stdio.h>
 #include <cstring>
 
 extern int8_t direction;
@@ -24,8 +24,9 @@ int vcEven[6] = {-1, 0, -1, 1, -1, 0};
 int vcOdd[6]  = {0, 1, -1, 1, 0, 1};
 
 
-Model::Model() : modelListener(0), counter(0), alfaGun(0), spawnedRowCount(0)
+Model::Model() : modelListener(0), counter(0), alfaGun(0), spawnedRowCount(0), paused(false), stage(0)
 {
+
     for (int r = 0; r < MAX_ROWS; ++r)
     {
         for (int c = 0; c < MAX_COLS; ++c)
@@ -42,6 +43,13 @@ Model::Model() : modelListener(0), counter(0), alfaGun(0), spawnedRowCount(0)
 
 void Model::tick()
 {
+	if(paused)
+		return;
+	if (getNumRow() >= MAX_ROWS){
+		if (modelListener)
+			modelListener->onGameOver();
+	}
+
     counter++;
     if(modelListener){
 		if(direction == 1){
@@ -68,6 +76,9 @@ void Model::tick()
 
         if (modelListener)
             modelListener->onEggGridChanged(); // Thông báo cho View cập nhật
+        char s[20];
+        sprintf(s, "%3d", stage);
+        HAL_UART_Transmit(&huart1, (uint8_t*)s, strlen(s), 10);
     }
 }
 
@@ -75,12 +86,30 @@ void Model::startTimer()
 {
     counter = 0;
     alfaGun = 0;
+	for (int r = 0; r < MAX_ROWS; ++r)
+	{
+	   for (int c = 0; c < MAX_COLS; ++c)
+	   {
+		   eggMap[r][c] = { 0, false, 0, 0, false };
+	   }
+	}
+
+	if (modelListener)
+		modelListener->onClearGrid();
+	for (int i = 0; i < 0; ++i)
+	{
+	   spawnRow();
+	}
+    if (modelListener)
+        modelListener->onEggGridChanged();
+	paused = false;
 }
 
 void Model::spawnRow()
 {
-    if (getNumRow() >= MAX_ROWS)
-        return;
+    if (getNumRow() >= MAX_ROWS){
+    	return;
+    }
 
     shiftRowsDown();
 
@@ -144,7 +173,7 @@ void Model::attachEggToGrid(int x, int y, BitmapId id)
     bool isOffsetRow = false;
 
     int currentCol = getNumRow();
-    if (currentCol > 0) {
+    if (currentCol > 0 && row > 0) {
         // Xác định từ hàng phía trên
         for (int c = 0; c < MAX_COLS; ++c) {
             if (eggMap[row - 1][c].active) {
@@ -154,7 +183,10 @@ void Model::attachEggToGrid(int x, int y, BitmapId id)
         }
     } else {
         // Nếu là hàng đầu tiên thì lấy theo số hàng spawn ra
-        isOffsetRow = (spawnedRowCount % 2 == 1);
+    	if(spawnedRowCount % 2 == 1)
+    		isOffsetRow = false;
+    	else
+    		isOffsetRow = true;
     }
 
     int xOffset = isOffsetRow ? eggSize / 2 : 0;
@@ -182,7 +214,6 @@ void Model::attachEggToGrid(int x, int y, BitmapId id)
         }
     }
 }
-
 
 void Model::clearSameColor(int r, int c) {
     if (!eggMap[r][c].active)
@@ -239,6 +270,7 @@ void Model::removeFloatingEggs(){
 		}
 	}
 }
+
 void Model::markConnected(int r, int c){
 	if (r < 0 || r >= MAX_ROWS || c < 0 || c >= MAX_COLS)
 		return;

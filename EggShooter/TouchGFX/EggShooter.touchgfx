@@ -14,10 +14,10 @@
           {
             "Type": "TextArea",
             "Name": "textArea1",
-            "X": 87,
-            "Y": 290,
-            "Width": 79,
-            "Height": 12,
+            "X": 70,
+            "Y": 298,
+            "Width": 100,
+            "Height": 15,
             "TextId": "__SingleUse_HUDB",
             "TextRotation": "0",
             "Color": {
@@ -94,8 +94,7 @@
           },
           {
             "Type": "Image",
-            "Name": "image1",
-            "Y": -1,
+            "Name": "background",
             "Width": 240,
             "Height": 320,
             "RelativeFilename": "Ingame.png"
@@ -105,8 +104,8 @@
             "Name": "Setting",
             "X": 191,
             "Y": 6,
-            "Width": 32,
-            "Height": 37,
+            "Width": 35,
+            "Height": 34,
             "Alpha": 0,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
@@ -114,8 +113,8 @@
             "ButtonStyles": [
               {
                 "Type": "BoxWithBorderButtonStyle",
-                "Width": 32,
-                "Height": 37,
+                "Width": 35,
+                "Height": 34,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
                 "ColorReleased": {
@@ -141,10 +140,10 @@
           {
             "Type": "TextArea",
             "Name": "Score",
-            "X": 94,
-            "Y": 18,
-            "Width": 33,
-            "Height": 12,
+            "X": 82,
+            "Y": 13,
+            "Width": 57,
+            "Height": 20,
             "TextId": "__SingleUse_NUAE",
             "TextRotation": "0",
             "AutoSize": true
@@ -235,14 +234,14 @@
         ],
         "Interactions": [
           {
-            "InteractionName": "Interaction1",
+            "InteractionName": "openMenuIngame",
             "Trigger": {
               "Type": "TriggerClicked",
               "TriggerComponent": "Setting"
             },
             "Action": {
               "Type": "ActionCustom",
-              "FunctionName": "SettingFuncion"
+              "FunctionName": "openMenuIngame"
             }
           }
         ]
@@ -260,9 +259,9 @@
           {
             "Type": "FlexButton",
             "Name": "Exit",
-            "X": 7,
-            "Y": 266,
-            "Width": 67,
+            "X": 9,
+            "Y": 265,
+            "Width": 61,
             "Height": 38,
             "Alpha": 0,
             "ButtonTrigger": {
@@ -271,7 +270,7 @@
             "ButtonStyles": [
               {
                 "Type": "BoxWithBorderButtonStyle",
-                "Width": 67,
+                "Width": 61,
                 "Height": 38,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
@@ -451,9 +450,9 @@
             "Type": "FlexButton",
             "Name": "Stage5",
             "X": 36,
-            "Y": 210,
-            "Width": 169,
-            "Height": 37,
+            "Y": 212,
+            "Width": 173,
+            "Height": 31,
             "Alpha": 0,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
@@ -461,8 +460,8 @@
             "ButtonStyles": [
               {
                 "Type": "BoxWithBorderButtonStyle",
-                "Width": 169,
-                "Height": 37,
+                "Width": 173,
+                "Height": 31,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
                 "ColorReleased": {
@@ -497,6 +496,122 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionBlock",
               "ActionComponent": "Ingame"
+            }
+          },
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage2"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionBlock",
+              "ActionComponent": "Ingame"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage3"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionBlock",
+              "ActionComponent": "Ingame"
+            }
+          },
+          {
+            "InteractionName": "Interaction3",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage4"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionBlock",
+              "ActionComponent": "Ingame"
+            }
+          },
+          {
+            "InteractionName": "Interaction4",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage5"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionBlock",
+              "ActionComponent": "Ingame"
+            }
+          },
+          {
+            "InteractionName": "Interaction5",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Exit"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionWipe",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Menu"
+            }
+          },
+          {
+            "InteractionName": "Interaction6",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "setStage1"
+            }
+          },
+          {
+            "InteractionName": "Interaction7",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage2"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "setStage2"
+            }
+          },
+          {
+            "InteractionName": "Interaction8",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage3"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "setStage3"
+            }
+          },
+          {
+            "InteractionName": "Interaction9",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage4"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "setStage4"
+            }
+          },
+          {
+            "InteractionName": "Interaction10",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "Stage5"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "setStage5"
             }
           }
         ]
@@ -590,10 +705,10 @@
           {
             "Type": "FlexButton",
             "Name": "HighScore",
-            "X": 27,
+            "X": 33,
             "Y": 103,
-            "Width": 186,
-            "Height": 38,
+            "Width": 170,
+            "Height": 39,
             "Alpha": 0,
             "ButtonTrigger": {
               "Type": "ClickButtonTrigger"
@@ -601,8 +716,399 @@
             "ButtonStyles": [
               {
                 "Type": "BoxWithBorderButtonStyle",
-                "Width": 186,
-                "Height": 38,
+                "Width": 170,
+                "Height": 39,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "myCustomContainer21",
+            "Width": 240,
+            "Height": 320,
+            "Visible": false,
+            "CustomContainerDefinitionName": "MyCustomContainer2"
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "Interaction1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "StageMode"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionBlock",
+              "ActionComponent": "Stage"
+            }
+          },
+          {
+            "InteractionName": "Interaction2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "SurvivalMode"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionBlock",
+              "ActionComponent": "Ingame"
+            }
+          },
+          {
+            "InteractionName": "Interaction3",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "HighScore"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "openHighScore"
+            }
+          },
+          {
+            "InteractionName": "Interaction4",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "SurvivalMode"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "setStageSurvival"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "Screen1",
+        "Components": [],
+        "Interactions": []
+      },
+      {
+        "Name": "Screen2",
+        "Components": [],
+        "Interactions": []
+      }
+    ],
+    "CustomContainerDefinitions": [
+      {
+        "Name": "MyCustomContainer1",
+        "Width": 240,
+        "Height": 320,
+        "Components": [
+          {
+            "Type": "Box",
+            "Name": "overlayWidget",
+            "Y": -1,
+            "Width": 240,
+            "Height": 320,
+            "Alpha": 128
+          },
+          {
+            "Type": "Image",
+            "Name": "menuIngame",
+            "Y": -1,
+            "Width": 240,
+            "Height": 320,
+            "RelativeFilename": "menuIngame.png"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "continueButton",
+            "X": 84,
+            "Y": 150,
+            "Width": 73,
+            "Height": 74,
+            "Alpha": 0,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 73,
+                "Height": 74,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "replay",
+            "X": 168,
+            "Y": 165,
+            "Width": 41,
+            "Height": 45,
+            "Alpha": 0,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 41,
+                "Height": 45,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "home",
+            "X": 33,
+            "Y": 165,
+            "Width": 41,
+            "Height": 45,
+            "Alpha": 0,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 41,
+                "Height": 45,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "continueGame",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "continueButton"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "continueGame"
+            }
+          },
+          {
+            "InteractionName": "home",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "home"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionBlock",
+              "ActionComponent": "Menu"
+            }
+          },
+          {
+            "InteractionName": "reloadStage",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "replay"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "reloadStage"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "MyCustomContainer2",
+        "Width": 240,
+        "Height": 320,
+        "Components": [
+          {
+            "Type": "Box",
+            "Name": "overlayWidget",
+            "Y": -1,
+            "Width": 240,
+            "Height": 320,
+            "Alpha": 128
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "highscore",
+            "X": -11,
+            "Y": 24,
+            "Width": 263,
+            "Height": 220,
+            "Filename": "highscore.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "home",
+            "Y": -1,
+            "Width": 240,
+            "Height": 321,
+            "Alpha": 0,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 240,
+                "Height": 321,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorReleased": {
+                  "Green": 102,
+                  "Blue": 153
+                },
+                "ColorPressed": {
+                  "Green": 153,
+                  "Blue": 204
+                },
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "score",
+            "X": 74,
+            "Y": 177,
+            "Width": 92,
+            "Height": 20,
+            "TextId": "__SingleUse_4KRF",
+            "TextRotation": "0",
+            "AutoSize": true,
+            "Wildcard1": {}
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "swicthIngame",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "home"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "Menu"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "MyCustomContainer3",
+        "Width": 240,
+        "Height": 320,
+        "Components": [
+          {
+            "Type": "Box",
+            "Name": "overlayWidget",
+            "Y": -1,
+            "Width": 240,
+            "Height": 320,
+            "Alpha": 128
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "gameover",
+            "Y": 80,
+            "Width": 240,
+            "Height": 159,
+            "Filename": "gameOver.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "flexButton1",
+            "X": 86,
+            "Y": 189,
+            "Width": 66,
+            "Height": 36,
+            "Alpha": 0,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 66,
+                "Height": 36,
                 "LockToFlexButtonSize": true,
                 "BorderSize": 5,
                 "ColorReleased": {
@@ -631,40 +1137,17 @@
             "InteractionName": "Interaction1",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "StageMode"
+              "TriggerComponent": "flexButton1"
             },
             "Action": {
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionBlock",
-              "ActionComponent": "Stage"
-            }
-          },
-          {
-            "InteractionName": "Interaction2",
-            "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "SurvivalMode"
-            },
-            "Action": {
-              "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionBlock",
-              "ActionComponent": "Ingame"
+              "ActionComponent": "Menu"
             }
           }
         ]
-      },
-      {
-        "Name": "Screen1",
-        "Components": [],
-        "Interactions": []
-      },
-      {
-        "Name": "Screen2",
-        "Components": [],
-        "Interactions": []
       }
     ],
-    "CustomContainerDefinitions": [],
     "Name": "EggShooter",
     "Resolution": {
       "Width": 240,

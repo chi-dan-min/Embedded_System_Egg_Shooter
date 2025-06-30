@@ -39,6 +39,12 @@
     <ClCompile Include="..\..\gui\src\screen2_screen\Screen2Presenter.cpp"/>
     <ClCompile Include="..\..\gui\src\screen2_screen\Screen2View.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\screen2_screen\Screen2ViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\MyCustomContainer1.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\MyCustomContainer1Base.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\MyCustomContainer2.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\MyCustomContainer2Base.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\MyCustomContainer3.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\MyCustomContainer3Base.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xml"/>
@@ -207,6 +213,12 @@
     <ClInclude Include="..\..\gui\include\gui\screen2_screen\Screen2Presenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\screen2_screen\Screen2View.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\screen2_screen\Screen2ViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\MyCustomContainer1.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\MyCustomContainer1Base.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\MyCustomContainer2.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\MyCustomContainer2Base.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\MyCustomContainer3.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\MyCustomContainer3Base.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

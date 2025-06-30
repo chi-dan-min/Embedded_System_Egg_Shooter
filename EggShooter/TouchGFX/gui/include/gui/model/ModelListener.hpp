@@ -13,6 +13,7 @@ public:
     virtual void onClearGrid() {}
     virtual void onRotateGunAndShot(float alfaGun, int8_t shoot){}
     virtual void handleIngameTickEvent(){}
+    virtual void onGameOver(){};
     void bind(Model* m)
     {
         model = m;

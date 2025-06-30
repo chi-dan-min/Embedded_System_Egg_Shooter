@@ -16,3 +16,6 @@ void MenuPresenter::deactivate()
 {
 
 }
+void MenuPresenter::setStage(int newStage){
+	model->setStage(newStage);
+}

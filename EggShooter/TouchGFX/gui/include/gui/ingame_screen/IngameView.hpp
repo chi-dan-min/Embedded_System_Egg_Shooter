@@ -4,6 +4,8 @@
 #include <gui_generated/ingame_screen/IngameViewBase.hpp>
 #include <gui/ingame_screen/IngamePresenter.hpp>
 #include <touchgfx/widgets/Image.hpp>
+#include <gui/containers/MyCustomContainer1.hpp>
+#include <gui/containers/MyCustomContainer3.hpp>
 class IngameView : public IngameViewBase
 {
 public:
@@ -11,7 +13,12 @@ public:
     virtual ~IngameView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-
+    virtual void openMenuIngame();
+    touchgfx::Callback<IngameView> continueCallback;
+    touchgfx::Callback<IngameView> reloadCallback;
+    void onContinueGame();
+    void reloadStage();
+    void openGameOver();
     void updateEggGrid();
     void clearEggGrid();
     void rotateGunAndShot(float alfaGun, int8_t shoot);
@@ -26,6 +33,8 @@ public:
 	float eggX, eggY;
 	float velocityX, velocityY;
 	float speed = 3.0f;
+	MyCustomContainer1 myCustomContainer11;//setting
+	MyCustomContainer3 myCustomContainer31;//game over
 };
 
 #endif // INGAMEVIEW_HPP

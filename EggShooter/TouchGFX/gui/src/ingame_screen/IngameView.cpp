@@ -2,32 +2,67 @@
 #include <touchgfx/Bitmap.hpp>
 #include <images/BitmapDatabase.hpp>
 #include <math.h>
+#include <touchgfx/Callback.hpp>
 IngameView::IngameView()
 {
     for (int row = 0; row < MAX_ROWS; ++row)
     {
         for (int col = 0; col < MAX_COLS; ++col)
         {
-            eggImages[row][col].setBitmap(Bitmap()); // Ban đầu trống
+            eggImages[row][col].setBitmap(Bitmap());
             eggImages[row][col].setXY(0, 0);
-            eggImages[row][col].setVisible(false);   // Ẩn đến khi cần hiện
-            add(eggImages[row][col]);                // Quan trọng!
+            eggImages[row][col].setVisible(false);
+            add(eggImages[row][col]);// quan trọng
         }
     }
+    myCustomContainer11.setXY(0, 0);
+    myCustomContainer11.setVisible(false);
+    add(myCustomContainer11);
+    myCustomContainer31.setXY(0, 0);
+	myCustomContainer31.setVisible(false);
+	add(myCustomContainer31);
 }
 
 void IngameView::setupScreen()
 {
     IngameViewBase::setupScreen();
+    presenter->startTimer(); // Bắt đầu tick timer
     updateEggGrid();         // Vẽ trứng ngay khi screen hiện
     next = getRandBitmapId();
     updateEggToShoot();
-    presenter->startTimer(); // Bắt đầu tick timer
+
 }
 
 void IngameView::tearDownScreen()
 {
     IngameViewBase::tearDownScreen();
+}
+
+void IngameView::openMenuIngame(){
+	presenter->setPaused(true);
+	continueCallback = touchgfx::Callback<IngameView>(this, &IngameView::onContinueGame);
+	reloadCallback = touchgfx::Callback<IngameView>(this, &IngameView::reloadStage);
+	myCustomContainer11.onContinue = &continueCallback;
+	myCustomContainer11.onReload = &reloadCallback;
+	myCustomContainer11.setVisible(true);
+	myCustomContainer11.invalidate();
+}
+void IngameView::onContinueGame()
+{
+    myCustomContainer11.setVisible(false);
+    presenter->setPaused(false);
+    myCustomContainer11.invalidate();
+}
+void IngameView::reloadStage(){
+	myCustomContainer11.setVisible(false);
+	presenter->setPaused(false);
+	myCustomContainer11.invalidate();
+	presenter->startTimer();
+}
+void IngameView::openGameOver(){
+	presenter->setPaused(true);
+	myCustomContainer31.setVisible(true);
+	myCustomContainer31.invalidate();
 }
 
 void IngameView::updateEggGrid()
@@ -135,6 +170,7 @@ void IngameView::handleTickEvent() {
 
         if (eggY < 50) {
             isShooting = false;
+            presenter->attachEggToGrid((int)eggX, (int)eggY, shooted);
             eggToShootImage.setVisible(false);
         }
     }
@@ -152,7 +188,6 @@ void IngameView::updateEggToShoot()
     nextEgg.setBitmap(Bitmap(next));
     nextEgg.invalidate();
 }
-
 
 BitmapId IngameView::getRandBitmapId()
 {

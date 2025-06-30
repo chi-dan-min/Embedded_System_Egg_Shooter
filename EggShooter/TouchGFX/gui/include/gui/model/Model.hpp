@@ -28,6 +28,8 @@ public:
 		bool even;
 	};
 	//init
+	void setPaused(bool state){paused = state;}
+	void setStage(int newStage){stage = newStage;}
 	const EggData& getEgg(int row, int col) const { return eggMap[row][col]; }
 	void spawnRow();
 	int getNumRow();
@@ -54,7 +56,9 @@ protected:
 	const int spacing = 0;
 	//gun setup
 	int counter = 0;
+	int stage = 0;
 	float alfaGun = 0;
+	bool paused;
 	BitmapId currentEggId;
 	BitmapId nextEggId;
 	// var grid process
