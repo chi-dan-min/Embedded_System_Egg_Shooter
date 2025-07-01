@@ -44,55 +44,50 @@ Model::Model() : modelListener(0), counter(0), alfaGun(0), spawnedRowCount(0), p
 
 void Model::tick()
 {
-	if(paused)
-		return;
-	if (getNumRow() >= MAX_ROWS || (stage != 6 && getNumRow() == 0)){
-		if (modelListener)
-			modelListener->onGameOver();
-		if(currentScore > highScore)
-			highScore = currentScore;
-	}
-	if (modelListener)
-	    	 modelListener->onUpdateScore(currentScore);
+if(paused)
+return;
+if (getNumRow() >= MAX_ROWS || (stage != 6 && getNumRow() == 0)){
+if (modelListener)
+  modelListener->onGameOver();
+if(currentScore > highScore)
+  highScore = currentScore;
+}
+if (modelListener)
+      modelListener->onUpdateScore(currentScore);
+   counter++;
+   if(modelListener){
+if(direction == 1){
+  if(alfaGun <= 1.1)
+   alfaGun += 0.05;
+ }
+else if(direction == -1){
+  if(alfaGun >= -1.1)
+   alfaGun -= 0.02;
+ }
 
-    counter++;
-    if(modelListener){
-		if(direction == 1){
-			if(alfaGun <= 1.1)
-				alfaGun += 0.05;
-		}
-		else if(direction == -1){
-			if(alfaGun >= -1.1)
-				alfaGun -= 0.02;
-		}
-		if (modelListener)
-			modelListener->onRotateGunAndShot(alfaGun, shoot);
-    }
+   if (modelListener)
+     modelListener->handleIngameTickEvent();
+   if(stage == 6){
+     if (counter % 300 == 0)
+ {
+      if(counter == 1500 ){
+       counter = 0;
+       eggCurrentCount++;
+      }
 
-    if (modelListener)
-    		modelListener->handleIngameTickEvent();
-    if(stage == 6){
-    	 if (counter % 300 == 0)
-		{
-    		 if(counter == 1500 ){
-    			 counter = 0;
-    			 eggCurrentCount++;
-    		 }
-
-
-			if (modelListener)
-				modelListener->onClearGrid();
-			spawnRow(); // Tạo hàng mới
-
-			if (modelListener)
-				modelListener->onEggGridChanged(); // Thông báo cho View cập nhật
-			char s[20];
-			sprintf(s, "%3d", stage);
-			HAL_UART_Transmit(&huart1, (uint8_t*)s, strlen(s), 10);
-		}
-    }
-
-
+  if (modelListener)
+   modelListener->onClearGrid();
+  spawnRow(); // Tạo hàng mới
+  if (modelListener)
+   modelListener->onEggGridChanged(); // Thông báo cho View cập nhật
+  char s[20];
+  sprintf(s, "%3d", stage);
+  HAL_UART_Transmit(&huart1, (uint8_t*)s, strlen(s), 10);
+ }
+   }
+if (modelListener)
+  modelListener->onRotateGunAndShot(alfaGun, shoot);
+   }
 }
 
 void Model::startTimer()
