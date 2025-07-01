@@ -1132,7 +1132,7 @@ void StartDefaultTask(void *argument)
 
 		char s[20];
 		sprintf(s, "%3d %3d\n", JoystickX, JoystickY);
-		//HAL_UART_Transmit(&huart1, s, strlen(s), 10);
+		HAL_UART_Transmit(&huart1, s, strlen(s), 10);
 		if(JoystickX < 1500 )
 		direction = LEFT;
 		else if(JoystickX > 3500)

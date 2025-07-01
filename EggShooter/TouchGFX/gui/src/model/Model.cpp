@@ -62,7 +62,7 @@ if(direction == 1){
  }
 else if(direction == -1){
   if(alfaGun >= -1.1)
-   alfaGun -= 0.02;
+   alfaGun -= 0.05;
  }
 
    if (modelListener)
