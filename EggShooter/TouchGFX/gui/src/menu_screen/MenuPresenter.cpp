@@ -19,3 +19,6 @@ void MenuPresenter::deactivate()
 void MenuPresenter::setStage(int newStage){
 	model->setStage(newStage);
 }
+int MenuPresenter::getHighScore(){
+	return model->getHighScore();
+}

@@ -3,6 +3,7 @@
 #include <images/BitmapDatabase.hpp>
 #include <math.h>
 #include <touchgfx/Callback.hpp>
+
 IngameView::IngameView()
 {
     for (int row = 0; row < MAX_ROWS; ++row)
@@ -30,7 +31,6 @@ void IngameView::setupScreen()
     updateEggGrid();         // Vẽ trứng ngay khi screen hiện
     next = getRandBitmapId();
     updateEggToShoot();
-
 }
 
 void IngameView::tearDownScreen()
@@ -63,6 +63,11 @@ void IngameView::openGameOver(){
 	presenter->setPaused(true);
 	myCustomContainer31.setVisible(true);
 	myCustomContainer31.invalidate();
+}
+void IngameView::showHighScore(int newScore){
+	currentScore.setWildcard(scoreBuffer);
+	 Unicode::snprintf(scoreBuffer, SCOREBUFFER_SIZE, "%d", newScore);
+	 currentScore.invalidate();
 }
 
 void IngameView::updateEggGrid()

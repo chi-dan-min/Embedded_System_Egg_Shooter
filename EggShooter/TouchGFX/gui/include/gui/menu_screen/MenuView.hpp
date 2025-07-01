@@ -14,6 +14,7 @@ public:
     virtual void openHighScore();
     virtual void setStageSurvival();
 protected:
+    Unicode::UnicodeChar scoreBuffer[SCOREBUFFER_SIZE];
 };
 
 #endif // MENUVIEW_HPP

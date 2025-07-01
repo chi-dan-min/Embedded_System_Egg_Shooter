@@ -37,6 +37,7 @@ public:
     const Model::EggData& getEggAt(int row, int col) const;
     virtual void startTimer();
     virtual void onGameOver();
+    virtual void onUpdateScore(int score);
 private:
     IngamePresenter();
 

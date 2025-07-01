@@ -19,19 +19,20 @@ const BitmapId eggIds[] = {
 };
 
 const int eggCount = sizeof(eggIds) / sizeof(BitmapId);
+int eggCurrentCount = 2;
 int vr[6] = {-1, -1,  0, 0, 1, 1};
 int vcEven[6] = {-1, 0, -1, 1, -1, 0};
 int vcOdd[6]  = {0, 1, -1, 1, 0, 1};
 
 
-Model::Model() : modelListener(0), counter(0), alfaGun(0), spawnedRowCount(0), paused(false), stage(0)
+Model::Model() : modelListener(0), counter(0), alfaGun(0), spawnedRowCount(0), paused(false), stage(0), highScore(0), currentScore(0)
 {
 
     for (int r = 0; r < MAX_ROWS; ++r)
     {
         for (int c = 0; c < MAX_COLS; ++c)
         {
-            eggMap[r][c] = { 0, false, 0, 0, false };
+            eggMap[r][c] = { 0, false, 0, 0, false, 0};
         }
     }
 
@@ -45,10 +46,14 @@ void Model::tick()
 {
 	if(paused)
 		return;
-	if (getNumRow() >= MAX_ROWS){
+	if (getNumRow() >= MAX_ROWS || (stage != 6 && getNumRow() == 0)){
 		if (modelListener)
 			modelListener->onGameOver();
+		if(currentScore > highScore)
+			highScore = currentScore;
 	}
+	if (modelListener)
+	    	 modelListener->onUpdateScore(currentScore);
 
     counter++;
     if(modelListener){
@@ -66,26 +71,35 @@ void Model::tick()
 
     if (modelListener)
     		modelListener->handleIngameTickEvent();
+    if(stage == 6){
+    	 if (counter % 300 == 0)
+		{
+    		 if(counter == 1500 ){
+    			 counter = 0;
+    			 eggCurrentCount++;
+    		 }
 
-    if (counter >= 500)
-    {
-        counter = 0;
-        if (modelListener)
-            modelListener->onClearGrid();
-        spawnRow(); // Tạo hàng mới
 
-        if (modelListener)
-            modelListener->onEggGridChanged(); // Thông báo cho View cập nhật
-        char s[20];
-        sprintf(s, "%3d", stage);
-        HAL_UART_Transmit(&huart1, (uint8_t*)s, strlen(s), 10);
+			if (modelListener)
+				modelListener->onClearGrid();
+			spawnRow(); // Tạo hàng mới
+
+			if (modelListener)
+				modelListener->onEggGridChanged(); // Thông báo cho View cập nhật
+			char s[20];
+			sprintf(s, "%3d", stage);
+			HAL_UART_Transmit(&huart1, (uint8_t*)s, strlen(s), 10);
+		}
     }
+
+
 }
 
 void Model::startTimer()
 {
     counter = 0;
     alfaGun = 0;
+    currentScore = 0;
 	for (int r = 0; r < MAX_ROWS; ++r)
 	{
 	   for (int c = 0; c < MAX_COLS; ++c)
@@ -94,9 +108,20 @@ void Model::startTimer()
 	   }
 	}
 
-	if (modelListener)
-		modelListener->onClearGrid();
-	for (int i = 0; i < 0; ++i)
+
+	if(stage == 1)
+		eggCurrentCount = 2;
+	else if(stage == 2)
+		eggCurrentCount = 3;
+	else if(stage == 3)
+		eggCurrentCount = 4;
+	else if(stage == 4)
+		eggCurrentCount = 5;
+	else if(stage == 5)
+		eggCurrentCount = 6;
+	else
+		eggCurrentCount = 2;
+	for (int i = 0; i < 3; ++i)
 	{
 	   spawnRow();
 	}
@@ -118,13 +143,14 @@ void Model::spawnRow()
     int actualCols = (spawnedRowCount % 2 == 0) ? MAX_COLS : MAX_COLS - 1;
     for (int col = 0; col < actualCols; ++col)
     {
-        int randomIdx = rand() % 3;
+        int randomIdx = rand() % eggCurrentCount;
 
         eggMap[row][col].id = eggIds[randomIdx];
         eggMap[row][col].active = true;
         eggMap[row][col].x = startX + rowOffset + col * (eggSize + spacing);
         eggMap[row][col].y = startY + row * (eggSize + spacing);
         eggMap[row][col].even = (spawnedRowCount % 2 == 0);
+        eggMap[row][col].score = (randomIdx + 1) * 5;
     }
 
     spawnedRowCount++;
@@ -148,7 +174,7 @@ void Model::shiftRowsDown()
 }
 
 BitmapId Model::getRandBitmapId(){
-	return eggIds[rand() % 3];
+	return eggIds[rand() % eggCurrentCount];
 }
 
 int Model::getNumRow(){
@@ -201,7 +227,10 @@ void Model::attachEggToGrid(int x, int y, BitmapId id)
             eggMap[row][col].x = startX + xOffset + col * (eggSize + spacing);
             eggMap[row][col].y = startY + row * (eggSize + spacing);
             eggMap[row][col].even = !isOffsetRow;
-
+            for(int i = 0; i < eggCount; i++){
+            	if(id == eggIds[i])
+            		 eggMap[row][col].score = (i + 1) * 5;
+            }
             if (modelListener)
                 modelListener->onEggGridChanged();
             clearSameColor(row, col);
@@ -210,7 +239,6 @@ void Model::attachEggToGrid(int x, int y, BitmapId id)
             removeFloatingEggs();
 			if (modelListener)
 				modelListener->onEggGridChanged();
-
         }
     }
 }
@@ -225,7 +253,15 @@ void Model::clearSameColor(int r, int c) {
     countEggSample = 0;
 
     markSameColor(r, c, color);
-
+	for (int row = 0; row < MAX_ROWS; ++row)
+	{
+		for (int col = 0; col < MAX_COLS; ++col)
+		{
+			if(!eggMap[row][col].active ){
+				eggMap[row][col].score = 0;
+			}
+		}
+	}
     if(countEggSample >= 3){
 		for (int row = 0; row < MAX_ROWS; ++row)
 		{
@@ -233,6 +269,8 @@ void Model::clearSameColor(int r, int c) {
 			{
 				if(visited[row][col]){
 					eggMap[row][col].active = false;
+					currentScore += eggMap[row][col].score;
+					eggMap[row][col].score = 0;
 				}
 			}
 		}
@@ -266,6 +304,7 @@ void Model::removeFloatingEggs(){
 		{
 			if(!visited[row][col]){
 				eggMap[row][col].active = false;
+				currentScore += eggMap[row][col].score;
 			}
 		}
 	}

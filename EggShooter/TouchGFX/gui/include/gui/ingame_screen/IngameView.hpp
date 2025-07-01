@@ -6,6 +6,8 @@
 #include <touchgfx/widgets/Image.hpp>
 #include <gui/containers/MyCustomContainer1.hpp>
 #include <gui/containers/MyCustomContainer3.hpp>
+#include <touchgfx/Unicode.hpp>
+#define SCOREBUFFER_SIZE 5
 class IngameView : public IngameViewBase
 {
 public:
@@ -14,6 +16,7 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
     virtual void openMenuIngame();
+    virtual void showHighScore(int newScore);
     touchgfx::Callback<IngameView> continueCallback;
     touchgfx::Callback<IngameView> reloadCallback;
     void onContinueGame();
@@ -35,6 +38,7 @@ public:
 	float speed = 3.0f;
 	MyCustomContainer1 myCustomContainer11;//setting
 	MyCustomContainer3 myCustomContainer31;//game over
+	Unicode::UnicodeChar scoreBuffer[SCOREBUFFER_SIZE];
 };
 
 #endif // INGAMEVIEW_HPP

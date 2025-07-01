@@ -25,6 +25,7 @@ public:
      */
     virtual void deactivate();
     virtual void setStage(int newStage);
+    virtual int getHighScore();
     virtual ~MenuPresenter() {}
 
 private:

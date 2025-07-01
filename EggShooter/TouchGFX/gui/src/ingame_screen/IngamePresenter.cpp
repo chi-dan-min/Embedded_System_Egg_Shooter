@@ -51,3 +51,6 @@ void IngamePresenter::attachEggToGrid(int x, int y, BitmapId id){
 void IngamePresenter::onGameOver(){
 	view.openGameOver();
 }
+void IngamePresenter::onUpdateScore(int score){
+	view.showHighScore(score);
+}

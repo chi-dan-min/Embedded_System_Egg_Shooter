@@ -14,6 +14,7 @@ public:
     virtual void onRotateGunAndShot(float alfaGun, int8_t shoot){}
     virtual void handleIngameTickEvent(){}
     virtual void onGameOver(){};
+    virtual void onUpdateScore(int score){};
     void bind(Model* m)
     {
         model = m;

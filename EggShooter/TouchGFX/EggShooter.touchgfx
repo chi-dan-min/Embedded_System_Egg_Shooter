@@ -139,14 +139,22 @@
           },
           {
             "Type": "TextArea",
-            "Name": "Score",
-            "X": 82,
+            "Name": "currentScore",
+            "X": 65,
             "Y": 13,
-            "Width": 57,
+            "Width": 90,
             "Height": 20,
             "TextId": "__SingleUse_NUAE",
             "TextRotation": "0",
-            "AutoSize": true
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "__SingleUse_NC2L"
+            }
           },
           {
             "Type": "Image",
@@ -1047,13 +1055,20 @@
             "Type": "TextArea",
             "Name": "score",
             "X": 74,
-            "Y": 177,
-            "Width": 92,
+            "Y": 174,
+            "Width": 90,
             "Height": 20,
             "TextId": "__SingleUse_4KRF",
             "TextRotation": "0",
+            "Color": {
+              "Red": 248,
+              "Green": 194,
+              "Blue": 27
+            },
             "AutoSize": true,
-            "Wildcard1": {}
+            "Wildcard1": {
+              "TextId": "__SingleUse_AMBX"
+            }
           }
         ],
         "Interactions": [

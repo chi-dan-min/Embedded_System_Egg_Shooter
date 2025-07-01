@@ -26,10 +26,13 @@ public:
 		int x;
 		int y;
 		bool even;
+		int score;
 	};
 	//init
 	void setPaused(bool state){paused = state;}
 	void setStage(int newStage){stage = newStage;}
+	int getHighScore(){return highScore;}
+	void setHighScore(int newScore){highScore = newScore;}
 	const EggData& getEgg(int row, int col) const { return eggMap[row][col]; }
 	void spawnRow();
 	int getNumRow();
@@ -57,6 +60,8 @@ protected:
 	//gun setup
 	int counter = 0;
 	int stage = 0;
+	int highScore = 0;
+	int currentScore = 0;
 	float alfaGun = 0;
 	bool paused;
 	BitmapId currentEggId;
